@@ -1,0 +1,203 @@
+Back-end:
+Admin Controller
+Todos os Empréstimos
+URL get: http://127.0.0.1:8000/api/todos-emprestimos
+body: none
+retorno ex:
+[
+    {
+        "id": 25,
+        "client_id": {
+            "id": 3,
+            "cpf": "22222222222",
+            "created_at": "2023-06-28T13:12:04.000000Z",
+            "updated_at": "2023-06-28T13:12:04.000000Z"
+        },
+        "bank_id": {
+            "id": 3,
+            "name": "Banco ATR SA",
+            "created_at": "2023-06-28T13:11:42.000000Z",
+            "updated_at": "2023-06-28T13:11:42.000000Z"
+        },
+        "modality_id": {
+            "id": 7,
+            "code": "12",
+            "name": "crédito pessoal",
+            "bank_id": 3,
+            "created_at": "2023-06-28T13:12:04.000000Z",
+            "updated_at": "2023-06-28T13:12:04.000000Z"
+        },
+        "amount_received": "6000.00",
+        "amount_payable": "6237.00",
+        "interest_rate": 0.0395,
+        "installments": 18,
+        "installments_value": 346.5,
+        "created_at": "2023-06-30T19:41:03.000000Z",
+        "updated_at": "2023-06-30T19:41:03.000000Z"
+    }
+]
+
+
+Apagar emprestimo
+URL post: http://127.0.0.1:8000/api/apagar-emprestimo
+body 
+{
+	"id":""
+}
+
+
+Client Controller
+Bancos e Ofertas do Cliente
+URL post: http://127.0.0.1:8000/api/checar-bancos
+body
+{
+	"cpf":""
+}
+retorno ex:
+{
+    "instituicoes": [
+        {
+            "id": 1,
+            "nome": "Banco PingApp",
+            "modalidades": [
+                {
+                    "codigo": "13",
+                    "nome": "crédito consignado",
+                    "oferta": {
+                        "QntParcelaMin": 24,
+                        "QntParcelaMax": 72,
+                        "valorMin": 10000,
+                        "valorMax": 19250,
+                        "jurosMes": 0.0118
+                    }
+                },
+                {
+                    "codigo": "3",
+                    "nome": "crédito pessoal",
+                    "oferta": {
+                        "QntParcelaMin": 12,
+                        "QntParcelaMax": 48,
+                        "valorMin": 5000,
+                        "valorMax": 8000,
+                        "jurosMes": 0.0495
+                    }
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "nome": "Financeira Assert",
+            "modalidades": [
+                {
+                    "codigo": "a50ed2ed-2b8b-4cc7-ac95-71a5568b34ce",
+                    "nome": "crédito pessoal",
+                    "oferta": {
+                        "QntParcelaMin": 12,
+                        "QntParcelaMax": 48,
+                        "valorMin": 3000,
+                        "valorMax": 7000,
+                        "jurosMes": 0.0365
+                    }
+                }
+            ]
+        }
+    ]
+}
+
+Melhores Ofertas
+URL post: http://127.0.0.1:8000/api/melhores-ofertas
+body
+{
+	"cpf":"",
+	"credito":""
+}
+retorno ex:
+{
+    "instituicoes": [
+        {
+            "id": 3,
+            "nome": "Banco ATR SA",
+            "modalidades": [
+                {
+                    "codigo": "12",
+                    "nome": "crédito pessoal",
+                    "oferta": {
+                        "ValorAPagar": 6237,
+                        "ValorSolicitado": "6000",
+                        "TaxaDeJuros": 0.0395,
+                        "Parcelas": {
+                            "qntmenor": 12,
+                            "menor": 519.75,
+                            "qntmaior": 48,
+                            "maior": 129.9375
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "nome": "Financeira Assert",
+            "modalidades": [
+                {
+                    "codigo": "56c6dbc9-7109-4a67-953d-4ca2ae6b8051",
+                    "nome": "Saque FGTS",
+                    "oferta": {
+                        "ValorAPagar": 6245.4,
+                        "ValorSolicitado": "6000",
+                        "TaxaDeJuros": 0.0409,
+                        "Parcelas": {
+                            "qntmenor": 18,
+                            "menor": 346.96666666666664,
+                            "qntmaior": 60,
+                            "maior": 104.08999999999999
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}
+
+Pegar um Empréstimo
+URL post: http://127.0.0.1:8000/api/solicitar-emprestimo
+{
+    "cpf" : "",
+    "credito": "",
+    "instituicaoId" : "",
+    "modalidadeCod" : "",
+    "parcelas" : ""
+}
+retorno ex: {
+    "Answer": 1,
+    "Loan": {
+        "id": 25,
+        "client_id": {
+            "id": 3,
+            "cpf": "22222222222",
+            "created_at": "2023-06-28T13:12:04.000000Z",
+            "updated_at": "2023-06-28T13:12:04.000000Z"
+        },
+        "bank_id": {
+            "id": 3,
+            "name": "Banco ATR SA",
+            "created_at": "2023-06-28T13:11:42.000000Z",
+            "updated_at": "2023-06-28T13:11:42.000000Z"
+        },
+        "modality_id": {
+            "id": 7,
+            "code": "12",
+            "name": "crédito pessoal",
+            "bank_id": 3,
+            "created_at": "2023-06-28T13:12:04.000000Z",
+            "updated_at": "2023-06-28T13:12:04.000000Z"
+        },
+        "amount_received": "6000.00",
+        "amount_payable": "6237.00",
+        "interest_rate": 0.0395,
+        "installments": 18,
+        "installments_value": 346.5,
+        "created_at": "2023-06-30T19:41:03.000000Z",
+        "updated_at": "2023-06-30T19:41:03.000000Z"
+    }
+}
